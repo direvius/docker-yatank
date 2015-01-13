@@ -58,5 +58,5 @@ docker run --name yatank -ti --rm -p 80:8888 -v /path-to-config-dir:/yandex-tank
 
 Then go to `http://localhost` or `http://host-ip` in a browser.
 
-**All report files will be created in /path/to/config/dir used for mount config.**
+All report files will be created in /path/to/config/dir used for mount config.
 
