@@ -1,5 +1,8 @@
 # What is Docker-YaTank
+
 Docker-YaTank is a [Yandex.Tank](https://tech.yandex.ru/tank/) container for load testing.
+This container is based on [ErgoZ's one](https://github.com/RiftBit/docker-yatank), but uses PyPI Tank package instead of .deb
+
 # How to use
 
 ## Usable params
@@ -26,37 +29,22 @@ address=example.com:80 ; Target's address and port
 rps_schedule=const(5,1m) ; load scheme
 header_http = 1.1
 headers = [Host: example.com] [Cookies: None] [Connection: close]
-uris = /
-[web]
-port = 8888
-interval = 1
-manualstop = 1
 ammo = /yandex-tank-configs/ammo.txt
 ```
-You should use 8888 port in load.ini, because container pre-configured to use this port.
-
-Param ``monitoring`` is not supported. May be in future it will be.
 
 ## Pull and Run the Docker Container
 
 
 ```
-docker run --name yatank -ti --rm -p 8888:8888 -v /path-to-config-dir:/yandex-tank-configs riftbit/docker-yatank -c /yandex-tank-configs/load.ini
+docker run --name yatank -ti --rm -v /path-to-config-dir:/yandex-tank-configs direvius/docker-yatank -c /yandex-tank-configs/load.ini
 ```
 
 or
 
 ```
-docker run --name yatank -ti --rm -p 8888:8888 -v /path/to/config/dir:/yandex-tank-configs riftbit/docker-yatank /yandex-tank-configs/ammo.txt
+docker run --name yatank -ti --rm -v /path/to/config/dir:/yandex-tank-configs direvius/docker-yatank /yandex-tank-configs/ammo.txt
 ```
 
-Test it by visiting `http://container-ip:8888` in a browser. On the other hand, if you need access outside the host on port 80:
-
-```
-docker run --name yatank -ti --rm -p 80:8888 -v /path-to-config-dir:/yandex-tank-configs riftbit/docker-yatank -c /yandex-tank-configs/load.ini
-```
-
-Then go to `http://localhost` or `http://host-ip` in a browser.
 
 **All report files will be created in /path/to/config/dir used for mount config.**
 

@@ -1,16 +1,23 @@
 # flapi docker
 #
 # VERSION 0.2
+# Based on https://github.com/RiftBit/docker-yatank by ErgoZ,
+# but uses PyPI Tank package instead of .deb
+
 FROM ubuntu:precise
-MAINTAINER ErgoZ <ergozru@gmail.com>
+MAINTAINER Alexey Lavrenuke <direvius@yandex-team.ru>
 
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update && apt-get install -y -q --no-install-recommends python-software-properties software-properties-common && \
     add-apt-repository ppa:yandex-load/main -y && \
-    apt-get update && apt-get install -y -q yandex-load-tank-base && \
+    apt-get update && apt-get install -y -q phantom phantom-ssl && \
     mkdir /yandex-example-configs && \
     mkdir /yandex-tank-configs
+
+RUN apt-get install -y -q python-pip build-essential libxml2-dev libxslt1-dev python-dev zlib1g-dev
+
+RUN pip install yandextank
 
 RUN echo "net.ipv4.tcp_max_tw_buckets=65536" >> /etc/sysctl.conf && \
     echo "net.ipv4.tcp_tw_recycle=1" >> /etc/sysctl.conf && \
