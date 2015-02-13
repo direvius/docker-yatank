@@ -15,9 +15,9 @@ RUN apt-get update && apt-get install -y -q --no-install-recommends python-softw
     mkdir /yandex-example-configs && \
     mkdir /yandex-tank-configs
 
-RUN apt-get install -y -q python-pip build-essential libxml2-dev libxslt1-dev python-dev zlib1g-dev
+RUN apt-get install -y -q python-pip python-dev
 
-RUN pip install ez_setup && pip install yandextank
+RUN pip install ez_setup && pip install yandextank && pip install yatank-online
 
 RUN echo "net.ipv4.tcp_max_tw_buckets=65536" >> /etc/sysctl.conf && \
     echo "net.ipv4.tcp_tw_recycle=1" >> /etc/sysctl.conf && \
