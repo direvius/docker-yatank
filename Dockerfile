@@ -17,7 +17,7 @@ RUN apt-get update && apt-get install -y -q --no-install-recommends python-softw
 
 RUN apt-get install -y -q python-pip python-dev
 
-RUN pip install ez_setup && pip install yandextank && pip install yatank-online
+RUN pip install yandextank && pip install yatank-online
 
 RUN echo "net.ipv4.tcp_max_tw_buckets=65536" >> /etc/sysctl.conf && \
     echo "net.ipv4.tcp_tw_recycle=1" >> /etc/sysctl.conf && \
