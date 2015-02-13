@@ -40,6 +40,6 @@ COPY example-load.ini /yandex-example-configs/load.ini
 
 ENTRYPOINT ["/entrypoint.sh"]
 
-EXPOSE 8888/tcp
+EXPOSE 8888/tcp 8001/tcp
 
 CMD ["-c /yandex-example-configs/load.ini"]
